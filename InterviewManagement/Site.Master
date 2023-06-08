@@ -1,0 +1,633 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="InterviewManagement.SiteMaster" %>
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Interview Management System</title>
+    <link href="Resources/images/M.png" rel="shortcut icon" type="image/x-icon" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="Resources/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="Resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="Resources/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="Resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="Resources/dist/css/adminlte.css?v=1">
+    <!-- overlayScrollbars (A javascript scrollbar plugin which hides native scrollbars, provides custom styleable overlay scrollbars and keeps the native functionality and feeling.)-->
+    <link rel="stylesheet" href="Resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- bootstrap datepicker -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <!-- Custom stylesheet -->
+    <link href="Resources/Custom/css/MasterStyle.css" rel="stylesheet" />
+    <link href="Resources/Custom/css/Cont.css" rel="stylesheet" />
+    <!-- Sweetalert -->
+    <link href="Resources/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="https://animate.style/animate.min.css" rel="stylesheet" />
+    <link href="Resources/Custom/css/sweetalert_mobileview.css" rel="stylesheet" />
+    <link href="Resources/Custom/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <script src="Resources/plugins/jquery/jquery.min.js"></script>
+
+    <link href="Resources/Custom/css/buttonstyles.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="Resources/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="Resources/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script> $.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4  (also used for carousel function)-->
+    <script src="Resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="Resources/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes (right side bar colour changes-->
+    <script src="Resources/dist/js/demo.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <!-- Sweetalert -->
+    <script src="Resources/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- loading -->
+    <script src="Resources/Custom/script/jquery.blockUI.js"></script>
+    <!-- Select2 -->
+    <script src="Resources/plugins/select2/js/select2.full.min.js"></script>
+    <!-- jquery-validation -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        table {
+            margin: 0 auto;
+            width: 100%;
+            clear: both;
+            border-collapse: collapse;
+        }
+
+        .disable-click {
+            pointer-events: none;
+            display: none;
+            color: #c7adad !important;
+        }
+        .VisFalse{display:none;}
+        /* .center {
+            background: url('Resources/images/UploadPanelBg.gif') no-repeat;
+            margin: auto;
+            width: 100%;
+            padding: 20px;
+            display: inline-block;
+        }*/
+
+        .brand-link5 {
+            line-height: 1.5;
+            padding: .8125rem .5rem;
+            white-space: nowrap;
+            height: 177px !important;
+            margin: -7px auto;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+            .brand-link5 img {
+                height: 140px !important;
+                width: 140px !important;
+            }
+
+            .brand-link5 .brand-image5 {
+                margin-left: 3.0em;
+                margin-top: 10px !important;
+                max-height: 140px;
+                width: auto;
+            }
+
+        .layout-footer-fixed .wrapper .content-wrapper {
+            padding-bottom: calc(0.5rem + 1px) !important;
+            margin-top: calc(0.5rem + 1px) !important;
+        }
+
+        .main-footer {
+            background-color: #fff;
+            border-top: 1px solid #dee2e6;
+            color: #869099;
+            padding: 1rem;
+            height: 25px;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+
+        @keyframes spinner_master {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner_master:before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 28%;
+            left: 7%;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            border: 1px solid #f6f;
+            border-top-color: #0e0;
+            border-right-color: #0dd;
+            border-bottom-color: #f90;
+            animation: spinner_master .4s linear infinite;
+        }
+
+        .lds-hourglass {
+            display: inline-block;
+            position: relative;
+        }
+
+            .lds-hourglass:after {
+                content: " ";
+                display: block;
+                border-radius: 50%;
+                width: 0;
+                height: 0;
+                margin: 0px;
+                box-sizing: border-box;
+                border: 13px solid #007bff;
+                border-color: #007bff transparent #007bff transparent;
+                animation: lds-hourglass 1.2s infinite;
+            }
+    </style>
+    <style>
+        .datepicker td, .datepicker th {
+            border-radius: 0px;
+        }
+
+        .datepicker table thead tr th.dow {
+            background-color: #09c6df;
+            color: white;
+            font-weight: 500;
+        }
+
+        .datepicker table thead tr th.prev,
+        .datepicker table thead tr th.datepicker-switch,
+        .datepicker table thead tr th.next {
+            background-color: #0092ab;
+            color: white;
+        }
+
+        .datepicker .datepicker-switch:hover, .datepicker .prev:hover, .datepicker .next:hover, .datepicker tfoot tr th:hover {
+            background-color: #0092ab;
+        }
+
+        .datepicker .datepicker-inline {
+            width: 100%;
+        }
+
+        .datepicker .datepicker table {
+            width: 100%;
+        }
+
+        .form-group.required .col-form-label:after {
+            content: "*";
+            color: red;
+            /* margin-left: 8px;*/
+        }
+
+        #loadernew {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            /* left: 50%;
+            top: 40%;
+            width: 19%;
+            height: 35%;
+            z-index: 9999;
+            border-radius: 48%;
+            border: none;
+            background: url('Resources/Images/loader.gif') 50% 50% no-repeat rgb(249,249,249);
+            */
+            background: url('Resources/Images/loader.gif') 50% 50% no-repeat;
+        }
+
+        #loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999 !important;
+            background: url('Resources/Images/loader.gif') 50% 50% no-repeat rgb(249,249,249);
+            opacity: 0.7;
+        }
+
+        * {
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
+        .RadGrid .rgFilterBox {
+            margin: 0;
+            vertical-align: middle;
+            width: 50px !important;
+        }
+
+        .RadGrid .rgFilter {
+            width: 1em !important;
+        }
+
+        .RadGrid .t-font-icon, .RadTreeList .t-font-icon, .RadCalendar .t-font-icon {
+            min-width: 0.428571em !important;
+        }
+
+        .RadGrid {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .RadGrid_Silk .rgHeader {
+            background-color: #17a2b8 !important;
+            border: 1px solid #258899 !important;
+            border-left-width: 0px !important;
+            color: #dfe5ea !important;
+            text-align: center !important;
+            font-weight: bold !important;
+        }
+
+        .RadGrid_Silk .rgRow > td, .RadGrid_Silk .rgAltRow > td, .RadGrid_Silk .rgEditRow > td {
+            border-bottom: 1px solid #51b0c0 !important;
+            border-right: 1px solid #51b0c0 !important;
+        }
+
+        .RadGrid_Silk .rgHeader a {
+            color: #FFF !important;
+        }
+
+        .RadGrid_Silk .rgHeader a {
+            color: #FFF !important;
+        }
+
+        .logout {
+            height: 45px;
+            margin-right: 80px
+        }
+        .nav-sidebar > .nav-item .nav-icon{
+            margin-left:0.01rem!important;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse" style="height: auto; min-height: 100%;"> 
+    <%--//sidebar-collapse--%>
+    <div id="loadernew" style="display: none;"></div>
+    <form runat="server" autocomplete="off" onkeydown="return (event.keyCode!=13)">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button" title="Main Menu"><i class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="Default.aspx" class="nav-link Homecs" title="Home page">Home</a>
+                    </li>
+                </ul>
+
+                <!-- SEARCH FORM -->
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <i class="fas fa-expand-arrows-alt fullscreen_button" style="cursor: pointer;" title="Click for full screen" data-toggle="tooltip"></i>
+                        </a>
+                    </li>
+                    <%-- <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" title="yourtext"><i
+                            class="fas fa-th-large"></i></a>
+                    </li>--%>
+                </ul>
+                <div>
+                    <%--                    <a href="Login.aspx" ><i class='fas fa-sign-out-alt fa-pull-left fa-3x'></i></a>--%>
+                    <asp:ImageButton ID="ImageButton1" runat="server" PostBackUrl="https://eccdatacenter.ae/main2022/" ImageUrl="~/Resources/Images/LogOut2.png"
+                        CssClass="logout" ToolTip="Click to log out" data-toggle="tooltip" />
+                </div>
+                <div style="clear: both;"></div>
+            </nav>
+            <!-- /.navbar -->
+
+            <!-- Main Sidebar Container -->
+            <aside class="main-sidebar sidebar-light-info elevation-4">
+                <!-- Brand Logo -->
+
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                    <!-- The slideshow -->
+                    <!--<div class="carousel-inner brand-link5 ">
+                        <div class="carousel-item active ">
+                            <img src="Resources/Images/ECCGroup.gif" alt="ECC" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/Abanos.jpg" alt="ABANOS" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/Aurora.png" alt="AURORA" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/PMI.png" alt="PMI" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/UME.png" alt="UME" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/DesertBoard.png" alt="DESERT" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="Resources/Images/CORESERV.png" alt="CORESERV" class="brand-image5" style="opacity: 1.8;">
+                        </div>
+                    </div>-->
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar user (optional) -->
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="info" style="margin-top: -8px; margin-bottom: -15px; margin-left: 46px;">
+                            <a href="#" class="d-block">IT Department</a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+                            <li class="nav-item">
+                                <a href="Default.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        DASHBOARD
+                                    </p>
+                                </a>
+                            </li>
+                           <%-- <li class="nav-item has-treeview" id="Interviwer">
+                                <a href="#" class="nav-link" >
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Interviwer <i class="fas fa-angle-left right" ></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item" id="EmployeeReg">
+                                        <a href="StaffInterview.aspx" class="nav-link" title="Staff Interview Details" >
+                                            <i class="fa fa-lg fa-receipt"></i>
+                                            <p>Staff Interview</p>
+                                        </a>
+                                    </li>
+                                     <li class="nav-item" id="EmployeeDetails">
+                                        <a href="InterviewDetails.aspx" class="nav-link" title="Staff Interview Details" >
+                                            <i class="fa fa-lg fa-receipt"></i>
+                                            <p>Interview Details</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>--%>
+                            <li class="nav-item" id="Interviwer">
+                                <a href="StaffInterview.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                     Interview Feedback Form
+                                    </p>
+                                </a>
+                            </li>
+                             <li class="nav-item" id="InterviwerDetails">
+                                <a href="InterviewDetails.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                     Feedback Form Details
+                                    </p>
+                                </a>
+                            </li>
+                             <li class="nav-item" id="HRMApproval">
+                                <a href="InterviewOffer_HRM.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                      HR Manager
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item" id="MNGApproval">
+                                <a href="InterviewOffer_MNG.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                     Management Approval
+                                    </p>
+                                </a>
+                            </li>
+                             <li class="nav-item" id="SalaryRange">
+                                <a href="GroupSalaryRange.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                     Group Salary Range
+                                    </p>
+                                </a>
+                            </li>
+                           <li class="nav-item" id="InterviewLog">
+                                <a href="InterviewOfferDetails.aspx" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                      Interview Log
+                                    </p>
+                                </a>
+                            </li>
+                           <%-- <li class="nav-item has-treeview" id="HRDept">
+                                <a href="#" class="nav-link" >
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Interview Log <i class="fas fa-angle-left right" ></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                     <li class="nav-item" id="HREmployeeDetails">
+                                        <a href="InterviewOfferDetails.aspx" class="nav-link" title="Staff Interview Details" >
+                                            <i class="fa fa-lg fa-receipt"></i>
+                                            <p>Interview Details</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                               <li class="nav-item has-treeview" id="HRM">
+                                <a href="#" class="nav-link" >
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>HR Manager <i class="fas fa-angle-left right" ></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                       <li class="nav-item" id="HRMApproval">
+                                        <a href="InterviewOffer_HRM.aspx" class="nav-link" title="HRM Approval" >
+                                            <i class="fa fa-lg fa-receipt"></i>
+                                            <p>HRM Approval</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                                   <li class="nav-item has-treeview" id="MNG">
+                                <a href="#" class="nav-link" >
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Excecutive Manager <i class="fas fa-angle-left right" ></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                       <li class="nav-item" id="MNGApproval">
+                                        <a href="InterviewOffer_MNG.aspx" class="nav-link" title="Management Approval" >
+                                            <i class="fa fa-lg fa-receipt"></i>
+                                            <p>Management Approval</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>--%>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper" style="padding: 15px; background-color: white">
+                <!-- Content Header (Page header) -->
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <strong>Copyright &copy; 2020 <a href="https://eccdatacenter.ae/">IT ECC</a>.</strong>
+                All rights reserved.
+   
+                <div class="float-right d-none d-sm-inline-block">
+                </div>
+            </footer>
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-light">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+    </form>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //debugger;
+            var ROLE = '<%= Session["ROLE"].ToString().ToUpper() %>';
+            if (ROLE == "HR") {
+                $("#HRMApproval").addClass("disable-click");
+                $("#MNGApproval").addClass("disable-click");
+                $("#Interviwer").addClass("disable-click");
+                $("#InterviwerDetails").addClass("disable-click");//feedback form entry users can access only this page 
+                //$("#HRM").addClass("disable-click");
+                //$("#MNG").addClass("disable-click");
+                //$("#InterviewLog").addClass("disable-click");
+            }
+             if (ROLE == "DEPTHEAD") {
+                 $("#InterviewLog").addClass("disable-click");
+                 $("#HRMApproval").addClass("disable-click");
+                 $("#MNGApproval").addClass("disable-click");
+                 $("#SalaryRange").addClass("disable-click");
+                 //$("#MNG").addClass("disable-click");
+                  //$("#HRDept").addClass("disable-click");
+            }
+            if (ROLE == "HRM") {
+                //$("#Interviwer").addClass("disable-click");
+                $("#InterviwerDetails").addClass("disable-click");
+                $("#MNGApproval").addClass("disable-click");
+                $("#SalaryRange").addClass("disable-click");
+
+                 //$("#HRDept").addClass("disable-click");
+                 //$("#HREmployeeDetails").addClass("disable-click");
+                 //$("#EmployeeReg").addClass("disable-click");
+                 //$("#MNG").addClass("disable-click");
+            }
+            if (ROLE == "MNG") {
+
+                $("#Interviwer").addClass("disable-click");
+                $("#InterviwerDetails").addClass("disable-click");
+                $("#HRMApproval").addClass("disable-click");
+                $("#SalaryRange").addClass("disable-click");
+                //$("#EmployeeReg").addClass("disable-click");
+                //$("#HRDept").addClass("disable-click"); 
+                //$("#HREmployeeDetails").addClass("disable-click");
+                //$("#HRM").addClass("disable-click");
+            }
+
+            if (ROLE == "IT") {
+                //$("#DataEntry").addClass("disable-click");
+                //$("#Dept_Management").addClass("disable-click");
+                //$("#Report").addClass("disable-click");
+            }
+        });
+        //$(function () {
+        //    $('[data-toggle="tooltip"]').tooltip()
+        //})
+        function successalert() {
+            Swal.fire({
+                type: 'success',
+                title: 'Your work has been saved',
+                text: 'your remarks has saved',
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+        }
+
+        function Erroralert() {
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: 'please check your data & try again'
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fullscreen_button").on("click", function () {
+                document.fullScreenElement && null !== document.fullScreenElement || !document.mozFullScreen && !document.webkitIsFullScreen ? document.documentElement.requestFullScreen ? document.documentElement.requestFullScreen() : document.documentElement.mozRequestFullScreen ? document.documentElement.mozRequestFullScreen() : document.documentElement.webkitRequestFullScreen && document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT) : document.cancelFullScreen ? document.cancelFullScreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitCancelFullScreen && document.webkitCancelFullScreen()
+            });
+            //e.preventDefault();
+            /** add active class and stay opened when selected */
+            var url = window.location;
+            $('ul.nav-sidebar a').filter(function () {
+                var dd = this.href;
+                if (dd == url.href) {
+                    return this.href == url;
+                }
+            }).addClass('active');
+            // for sidebar menu and treeview
+            $('ul.nav-treeview a').filter(function () {
+                var dd = this.href;
+                if (dd == url.href) {
+                    return this.href;
+                }
+                //return this.href == url;
+            }).parentsUntil(".nav-sidebar > .nav-treeview")
+                .css({ 'display': 'block' })
+                .addClass('menu-open').prev('a')
+                .addClass('active');
+        });
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+
+    </script>
+</body>
+</html>
